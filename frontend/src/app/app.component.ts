@@ -1,25 +1,183 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from './services/cart.service';
-import { ScrollService } from './services/scroll.service';
+import { Component } from '@angular/core';
+
+interface FeatureCard {
+  title: string;
+  description: string;
+  pill?: string;
+}
+
+interface MethodCard {
+  name: string;
+  principle: string;
+  steps: string[];
+  risk: string;
+  linkLabel: string;
+}
+
+interface RiskItem {
+  title: string;
+  detail: string;
+  mitigation: string;
+}
+
+interface QAItem {
+  q: string;
+  a: string;
+}
+
+interface QuizItem {
+  q: string;
+  options: string[];
+  answer: number;
+  explanation: string;
+}
+
+interface TermItem {
+  term: string;
+  definition: string;
+}
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-  title = 'luv2shop-ecommerce';
-  isScrolledDown: boolean = false;
+export class AppComponent {
+  title = '可燃冰开采机器人科普平台';
 
-  constructor(
-    private cartService: CartService,
-    private scrollService: ScrollService
-  ) {}
+  hero = {
+    headline: '可燃冰开采机器人科普应用平台',
+    sub: '深海仿真 · 开采原理 · 风险预警 · 机器人技术 · 互动学习',
+    ctaPrimary: '进入深海作业仿真',
+    ctaSecondary: '查看开采方法演示',
+  };
 
-  ngOnInit() {
-    // reset cart data
-    this.cartService.resetCartItems();
-    this.scrollService
-      .getScrollObservable()
-      .subscribe((isScrolledDown) => (this.isScrolledDown = isScrolledDown));
+  featureCards: FeatureCard[] = [
+    {
+      title: '可燃冰是什么',
+      description: '形成、分布、价值与开采挑战的系统介绍。',
+      pill: '知识分享',
+    },
+    {
+      title: '深海机器人如何作业',
+      description: '耐压、防腐、导航、视觉与作业流程的可视化解读。',
+      pill: '仿真链接占位',
+    },
+    {
+      title: '多种开采方法',
+      description: '热激与 CO₂ 置换等方法的原理与流程演示。',
+      pill: 'Unity 场景占位',
+    },
+    {
+      title: '风险与预警',
+      description: '甲烷泄漏、地质稳定、设备故障、生态扰动的预警流程。',
+      pill: '安全',
+    },
+    {
+      title: '机器人技术价值',
+      description: '在安全、效率、环保方面的关键作用与工程实践。',
+      pill: '工程',
+    },
+    {
+      title: '互动学习',
+      description: 'FAQ、小测验、术语表与时间轴，服务公众与青少年。',
+      pill: '互动',
+    },
+  ];
+
+  methodCards: MethodCard[] = [
+    {
+      name: '热激开采',
+      principle: '提升局部温度使可燃冰分解释放甲烷，配合导流与收集。',
+      steps: ['升温与保温控制', '气液分离与导流', '压力监测与泄压'],
+      risk: '局部地层不稳、能耗高、热影响范围需精控。',
+      linkLabel: 'Unity 场景（暂未上线）',
+    },
+    {
+      name: 'CO₂ 置换开采',
+      principle: '向储层注入 CO₂，与甲烷水合物交换，释放甲烷并固存 CO₂。',
+      steps: ['注入 CO₂ 流体', '置换反应与甲烷析出', '混合气液分离与回收'],
+      risk: '注入均匀性、界面控制、潜在泄漏需监测。',
+      linkLabel: 'Unity 场景（暂未上线）',
+    },
+  ];
+
+  riskItems: RiskItem[] = [
+    {
+      title: '甲烷泄漏',
+      detail: '快速分解释放或井口密封失败可能导致泄漏。',
+      mitigation: '分级升温/注入、阀控与实时气体监测、冗余密封。',
+    },
+    {
+      title: '地质稳定性',
+      detail: '开采引起孔隙压力变化，可能导致地层松动、塌陷。',
+      mitigation: '压力监测、分阶段开采、地质超前预判与支护。',
+    },
+    {
+      title: '设备与机器人故障',
+      detail: '深海高压腐蚀、运动部件失效、能量与通信中断。',
+      mitigation: '冗余设计、防腐材料、应急返航、在位自检与热插拔。',
+    },
+    {
+      title: '生态扰动',
+      detail: '沉积物扰动、噪声与化学影响。',
+      mitigation: '低扰动作业窗口、过滤与隔离、环境基线监测与评估。',
+    },
+  ];
+
+  qaItems: QAItem[] = [
+    {
+      q: '可燃冰为何被视为潜在清洁能源？',
+      a: '甲烷含量高、燃烧相对洁净、资源量大，但需控制开采风险与排放。',
+    },
+    {
+      q: '深海机器人在开采中的作用是什么？',
+      a: '完成勘探、监测、阀控、取样、维护与应急操作，降低人力风险。',
+    },
+    {
+      q: '热激与 CO₂ 置换的主要差异？',
+      a: '热激侧重加热分解；CO₂ 置换侧重分子交换并兼具 CO₂ 固存潜力。',
+    },
+    {
+      q: '风险预警如何触发？',
+      a: '基于压力/流量/气体/振动等多传感器阈值与模型，分级告警与联锁。',
+    },
+  ];
+
+  quizItems: QuizItem[] = [
+    {
+      q: 'CO₂ 置换开采的一个附加价值是：',
+      options: ['减少热量输入', '固存 CO₂，兼顾减排', '完全无需监测压力'],
+      answer: 1,
+      explanation: 'CO₂ 置换可兼顾甲烷开采与 CO₂ 固存，但仍需严格压力与泄漏监测。',
+    },
+    {
+      q: '深海机器人为何需要冗余与自检？',
+      options: ['降低造价', '在高压腐蚀环境保证可靠性', '便于��工潜水'],
+      answer: 1,
+      explanation: '高压、低温、腐蚀环境下，冗余与自检提高可靠性与安全性。',
+    },
+    {
+      q: '热激开采的关键风险控制点包括：',
+      options: ['增加噪声', '局部温度与压力的精控', '减少传感器'],
+      answer: 1,
+      explanation: '升温需精控温压，防止过快分解释放或地层不稳。',
+    },
+  ];
+
+  termItems: TermItem[] = [
+    { term: '可燃冰（天然气水合物）', definition: '甲烷为主的气体水合物，在高压低温条件下呈固态。' },
+    { term: '热激开采', definition: '通过升温促使水合物分解，释放甲烷。' },
+    { term: 'CO₂ 置换', definition: '注入 CO₂，与水合物中的甲烷交换并固存 CO₂。' },
+    { term: '耐压壳体', definition: '用于深海设备的加厚、强化结构，抵抗高静水压力。' },
+    { term: '冗余设计', definition: '关键部件或通道多备份，保证故障情况下仍可运行或安全停机。' },
+  ];
+
+  quizState = {
+    showAnswers: false,
+  };
+
+  toggleQuizAnswers() {
+    this.quizState.showAnswers = !this.quizState.showAnswers;
   }
 }
