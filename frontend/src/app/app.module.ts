@@ -28,6 +28,12 @@ import {
 import { MembersPageComponent } from './components/members-page/members-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { EduHomeComponent } from './components/edu-home/edu-home.component';
+import { EduSimulationComponent } from './components/edu-simulation/edu-simulation.component';
+import { EduMethodsComponent } from './components/edu-methods/edu-methods.component';
+import { EduRiskAlertsComponent } from './components/edu-risk-alerts/edu-risk-alerts.component';
+import { EduRoboticsComponent } from './components/edu-robotics/edu-robotics.component';
+import { EduLearnComponent } from './components/edu-learn/edu-learn.component';
 
 const oktaConfig = Object.assign(
   {
@@ -60,6 +66,13 @@ const routes: Routes = [
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
+  { path: 'edu/home', component: EduHomeComponent },
+  { path: 'edu/simulation', component: EduSimulationComponent },
+  { path: 'edu/methods', component: EduMethodsComponent },
+  { path: 'edu/risk-alerts', component: EduRiskAlertsComponent },
+  { path: 'edu/robotics', component: EduRoboticsComponent },
+  { path: 'edu/learn', component: EduLearnComponent },
+  { path: 'edu', redirectTo: '/edu/home', pathMatch: 'full' },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: '**', redirectTo: '/products', pathMatch: 'full' },
 ];
@@ -78,6 +91,12 @@ const routes: Routes = [
     LoginStatusComponent,
     MembersPageComponent,
     OrderHistoryComponent,
+    EduHomeComponent,
+    EduSimulationComponent,
+    EduMethodsComponent,
+    EduRiskAlertsComponent,
+    EduRoboticsComponent,
+    EduLearnComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
