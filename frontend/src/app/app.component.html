@@ -1,67 +1,197 @@
-<div class="page-wrapper">
-  <!-- MENU SIDEBAR-->
-  <aside class="menu-sidebar d-none d-md-block">
-    <div class="logo d-none d-md-block">
-      <a routerLink="/products" style="cursor: pointer">
-        <img
-          src="assets/images/logo.png"
-          alt="luv2shop"
-          class="img-responsive"
-        />
-      </a>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-mark" aria-hidden="true"></div>
+      <div>
+        <div class="brand-title">可燃冰开采机器人</div>
+        <div class="brand-sub">科普应用平台</div>
+      </div>
     </div>
+    <nav class="nav-links">
+      <a href="#intro">概览</a>
+      <a href="#simulation">仿真</a>
+      <a href="#methods">开采方法</a>
+      <a href="#risk">风险预警</a>
+      <a href="#robotics">机器人</a>
+      <a href="#learn">互动学习</a>
+    </nav>
+  </header>
 
-    <app-product-category-menu></app-product-category-menu>
-  </aside>
-  <!-- END MENU SIDEBAR-->
-  <!-- START MOBILE NAV-->
-  <nav
-    class="mobile-nav d-block d-md-none"
-    [ngClass]="{ hidden: isScrolledDown }"
-  >
-    <app-product-category-menu></app-product-category-menu>
-  </nav>
-  <!-- END MOBILE NAV-->
-  <!-- PAGE CONTAINER-->
-  <div class="page-container">
-    <!-- HEADER DESKTOP-->
-    <header class="header-desktop">
-      <div class="section-content section-content-p30">
-        <div class="container-fluid">
-          <div class="header-wrap">
-            <div class="left-header">
-              <app-search></app-search>
-            </div>
-            <div class="right-header">
-              <div class="logo d-md-none">
-                <a routerLink="/products" style="cursor: pointer">
-                  <img
-                    src="assets/images/logo.png"
-                    alt="luv2shop"
-                    class="img-responsive"
-                  />
-                </a>
-              </div>
-              <app-login-status></app-login-status>
-              <app-cart-status></app-cart-status>
-            </div>
-          </div>
+  <main>
+    <section id="intro" class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">深海 · 能源 · 机器人 · 安全</p>
+        <h1>{{ hero.headline }}</h1>
+        <p class="sub">{{ hero.sub }}</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#simulation">{{ hero.ctaPrimary }}</a>
+          <a class="btn ghost" href="#methods">{{ hero.ctaSecondary }}</a>
+        </div>
+        <div class="meta">
+          <span>科技蓝主题</span>
+          <span>Unity 场景占位</span>
+          <span>中文科普</span>
         </div>
       </div>
-    </header>
-    <!-- END HEADER DESKTOP-->
+      <div class="hero-visual">
+        <div class="orbital">
+          <div class="robot-sphere">
+            <div class="eye"></div>
+            <div class="antenna"></div>
+          </div>
+          <div class="ring ring-a"></div>
+          <div class="ring ring-b"></div>
+        </div>
+      </div>
+    </section>
 
-    <!-- MAIN CONTENT-->
-    <router-outlet></router-outlet>
-  </div>
+    <section class="section" aria-label="平台功能概览">
+      <div class="section-head">
+        <h2>平台功能概览</h2>
+        <p>形成、分布、价值、挑战；深海机器人作业；开采方法；风险预警；互动学习。</p>
+      </div>
+      <div class="grid cards">
+        <article class="card" *ngFor="let f of featureCards">
+          <div class="pill" *ngIf="f.pill">{{ f.pill }}</div>
+          <h3>{{ f.title }}</h3>
+          <p>{{ f.description }}</p>
+        </article>
+      </div>
+    </section>
 
-  <!-- END PAGE CONTAINER-->
+    <section id="simulation" class="section" aria-label="深海作业仿真">
+      <div class="section-head">
+        <h2>深海作业仿真（占位）</h2>
+        <p>展示机器人在高压、低温、腐蚀环境下的导航、作业与监测流程。Unity 场景尚未发布，预留链接。</p>
+      </div>
+      <div class="sim-placeholder">
+        <div>
+          <div class="pill">Unity 场景占位</div>
+          <h3>深海作业流程</h3>
+          <p>耐压壳体 · 推进/定位 · 视觉/声呐 · 抓取/切割 · 阀控/回收 · 自检/应急返航</p>
+          <button class="btn disabled" disabled>Unity 场景（暂未上线）</button>
+        </div>
+        <div class="placeholder-graphic">
+          <div class="grid-dots"></div>
+          <div class="chip"></div>
+        </div>
+      </div>
+    </section>
 
-  <footer>
-    <ul>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Contact Us</a></li>
-      <li><a href="#">Help</a></li>
-    </ul>
+    <section id="methods" class="section" aria-label="开采方法演示">
+      <div class="section-head">
+        <h2>开采方法演示</h2>
+        <p>热激与 CO₂ 置换的原理、流程与风险控制，配合机器人执行与监测。</p>
+      </div>
+      <div class="grid methods">
+        <article class="card method" *ngFor="let m of methodCards">
+          <h3>{{ m.name }}</h3>
+          <p class="muted">原理：{{ m.principle }}</p>
+          <ul>
+            <li *ngFor="let s of m.steps">{{ s }}</li>
+          </ul>
+          <p class="risk">风险要点：{{ m.risk }}</p>
+          <button class="btn ghost" disabled>{{ m.linkLabel }}</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="risk" class="section" aria-label="环境风险与预警">
+      <div class="section-head">
+        <h2>环境风险与预警</h2>
+        <p>监测—分析—告警—应急：传感器/模型驱动的多级预警流程。</p>
+      </div>
+      <div class="grid risks">
+        <article class="card risk" *ngFor="let r of riskItems">
+          <h3>{{ r.title }}</h3>
+          <p>{{ r.detail }}</p>
+          <p class="mitigation">缓解：{{ r.mitigation }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="robotics" class="section" aria-label="机器人技术与安全效率">
+      <div class="section-head">
+        <h2>机器人技术与安全效率</h2>
+        <p>深海耐压、防腐、推进定位、感知、AI 控制、冗余与应急保障。</p>
+      </div>
+      <div class="robotics-grid">
+        <div class="card">
+          <h3>关键子系统</h3>
+          <ul>
+            <li>耐压壳体与密封，防腐材料</li>
+            <li>推进/定位：矢量推进、惯导/声呐/视觉融合</li>
+            <li>作业：机械臂、抓取/切割、阀控与管线操作</li>
+            <li>感知：多传感器融合（压力、流量、气体、振动、温度）</li>
+            <li>通信与电源：有缆/无线混合，能量管理</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>安全与效率</h3>
+          <ul>
+            <li>冗余设计与故障自检，分级降级/安全停机</li>
+            <li>实时监测与联锁，异常联动阀控与返航</li>
+            <li>路径/能耗优化，低扰动作业窗口</li>
+            <li>环境基线监测与溯源</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="learn" class="section" aria-label="互动学习">
+      <div class="section-head">
+        <h2>互动学习</h2>
+        <p>FAQ、小测验、术语表，服务公众科普与青少年兴趣培养。</p>
+      </div>
+
+      <div class="grid learn-grid">
+        <div class="card faq">
+          <h3>常见问答</h3>
+          <div class="qa" *ngFor="let qa of qaItems">
+            <div class="q">Q：{{ qa.q }}</div>
+            <div class="a">A：{{ qa.a }}</div>
+          </div>
+        </div>
+
+        <div class="card quiz">
+          <h3>小测验</h3>
+          <div class="quiz-item" *ngFor="let q of quizItems; let i = index">
+            <div class="q">{{ i + 1 }}. {{ q.q }}</div>
+            <ul>
+              <li *ngFor="let opt of q.options; let j = index">
+                <span class="opt-label">{{ 'ABCD'[j] }}.</span>
+                <span>{{ opt }}</span>
+                <span
+                  class="answer"
+                  *ngIf="quizState.showAnswers && j === q.answer"
+                  >✓ 正确</span
+                >
+              </li>
+            </ul>
+            <div class="explain" *ngIf="quizState.showAnswers">{{ q.explanation }}</div>
+          </div>
+          <button class="btn primary" (click)="toggleQuizAnswers()">
+            {{ quizState.showAnswers ? '隐藏答案' : '显示答案' }}
+          </button>
+        </div>
+
+        <div class="card glossary">
+          <h3>术语表</h3>
+          <ul>
+            <li *ngFor="let t of termItems">
+              <strong>{{ t.term }}：</strong> {{ t.definition }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>可燃冰开采机器人科普应用平台 · 科技蓝主题 · Unity 场景占位</div>
+    <div class="footer-links">
+      <span>后续可接入 WebGL 场景链接</span>
+      <span>支持本地/线上部署</span>
+    </div>
   </footer>
 </div>
